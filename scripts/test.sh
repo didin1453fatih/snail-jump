@@ -18,18 +18,18 @@ for f in ./src/proto/*; do
     IFS='.' read -ra DIR_BIN <<<"$(basename "$f")"
     echo ${DIR_BIN[0]}
 
-    mkdir -p "./src/proto_bin/${DIR_BIN[0]}"
+    mkdir -p "./proto_bin/${DIR_BIN[0]}"
 
     ${GRPC_TOOLS_NODE_PROTOC} \
-        --js_out=import_style=commonjs,binary:"./src/proto_bin/${DIR_BIN[0]}" \
-        --grpc_out="./src/proto_bin/${DIR_BIN[0]}" \
+        --js_out=import_style=commonjs,binary:"./proto_bin/${DIR_BIN[0]}" \
+        --grpc_out="./proto_bin/${DIR_BIN[0]}" \
         --plugin=protoc-gen-grpc="${GRPC_TOOLS_NODE_PROTOC_PLUGIN}" \
         -I './src/proto/' \
         "${f}"
 
     ${GRPC_TOOLS_NODE_PROTOC} \
         --plugin=protoc-gen-ts="${PROTOC_GEN_TS_PATH}" \
-        --ts_out="./src/proto_bin/${DIR_BIN[0]}" \
+        --ts_out="./proto_bin/${DIR_BIN[0]}" \
         -I './src/proto/' \
         "${f}"
 done
