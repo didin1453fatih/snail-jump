@@ -5,6 +5,7 @@ import * as grpc from 'grpc';
 import greeterHandler from './handlers/greeter';
 
 import echoHandler from './handlers/echo';
+import user from './handlers/user';
 
 // protoIndex();
 
@@ -17,6 +18,7 @@ export const startServer: StartServerType = (): void => {
     // register all the handler here...
     server.addService(greeterHandler.service, greeterHandler.handler);
     server.addService(echoHandler.service, echoHandler.handler)
+    server.addService(user.service, user.handler)
 
     // define the host/port for server
     server.bindAsync(
