@@ -1,12 +1,12 @@
 import 'dotenv/config';
 import * as grpc from 'grpc';
 
-import { protoIndex } from './proto';
+// import { protoIndex } from './proto_bin/index';
 import greeterHandler from './handlers/greeter';
 
 import echoHandler from './handlers/echo';
 
-protoIndex();
+// protoIndex();
 
 const port: string | number = process.env.PORT || 50051;
 

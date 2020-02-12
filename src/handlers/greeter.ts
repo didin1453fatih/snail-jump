@@ -1,7 +1,7 @@
 import * as grpc from 'grpc';
 
-import { HelloRequest, HelloResponse } from '../proto/greeter/greeter_pb';
-import { GreeterService, IGreeterServer } from '../proto/greeter/greeter_grpc_pb';
+import { HelloRequest, HelloResponse } from '../proto_bin/greeter/greeter_pb';
+import { GreeterService, IGreeterServer } from '../proto_bin/greeter/greeter_grpc_pb';
 
 class GreeterHandler implements IGreeterServer {
     /**
