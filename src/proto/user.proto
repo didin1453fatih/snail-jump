@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package grpc.user;
+
+// The greeting service definition.
+service User {
+    // Sends a greeting
+    rpc Registration (RegistrationRequest) returns (RegistrationResponse);
+}
+
+// The request message containing the user's name.
+message RegistrationRequest {
+     string username = 1;
+     string email = 2;
+     string password = 3;
+     string gender = 4;
+}
+
+// The response message containing the greetings
+message RegistrationResponse {
+     bool success=1;
+     string message = 2;
+}
