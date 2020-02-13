@@ -1,19 +1,20 @@
-import 'dotenv/config';
+import dotenv from "dotenv"
 import * as grpc from 'grpc';
 
-// import { protoIndex } from './proto_bin/index';
 import greeterHandler from './handlers/greeter';
 
 import echoHandler from './handlers/echo';
 import user from './handlers/user';
+import { init } from '../config/DataStore.config'
 
-// protoIndex();
-
+dotenv.config()
+ 
 const port: string | number = process.env.PORT || 50051;
 
 type StartServerType = () => void;
 export const startServer: StartServerType = (): void => {
     // create a new gRPC server
+    init()
     const server: grpc.Server = new grpc.Server();
     // register all the handler here...
     server.addService(greeterHandler.service, greeterHandler.handler);
