@@ -1,20 +1,23 @@
-import { Table, Column, Model, HasMany } from 'sequelize-typescript';
+import { token } from './token.model';
+import { Table, Column, Model, HasMany, Unique } from 'sequelize-typescript';
 
 @Table
 export class user extends Model<user> {
 
     @Column
+    @Unique
     username: string;
 
     @Column
-    email: Date;
+    @Unique
+    email: string;
 
     @Column
-    password: Date;    
+    password: string;    
 
     @Column
-    gender: Date;    
+    gender: string;    
 
-    // @HasMany(() => Hobby)
-    // hobbies: Hobby[];
+    @HasMany(() => token)
+    hobbies: token[];
 }
