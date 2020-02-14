@@ -1,13 +1,17 @@
 import { user } from './user.model';
-import { Table, Column, Model, HasMany, Unique, HasOne } from 'sequelize-typescript';
+import { Table, Column, Model, HasMany, Unique, HasOne, ForeignKey, BelongsTo } from 'sequelize-typescript';
 
 @Table
 export class token extends Model<token> {
 
-    @Column
     @Unique
+    @Column
     token: string;
 
-    @HasOne(() => user)
-    user: user
-}
+    @ForeignKey(() => user)
+    @Column
+    userId: number;
+
+    @BelongsTo(() => user)
+    user: user;
+} 

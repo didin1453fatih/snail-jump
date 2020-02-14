@@ -4,12 +4,12 @@ import { Table, Column, Model, HasMany, Unique } from 'sequelize-typescript';
 @Table
 export class user extends Model<user> {
 
-    @Column
     @Unique
+    @Column
     username: string;
 
-    @Column
     @Unique
+    @Column
     email: string;
 
     @Column
@@ -19,5 +19,5 @@ export class user extends Model<user> {
     gender: string;    
 
     @HasMany(() => token)
-    hobbies: token[];
+    token: token[];
 }
