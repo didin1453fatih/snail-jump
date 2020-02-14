@@ -7,7 +7,7 @@ service User {
     // Sends a greeting
     rpc Registration (RegistrationRequest) returns (RegistrationResponse);
     rpc GetMyAccount (GetMyAccountRequest) returns (UserData);
-    rpc Login(LoginRequest) returns (LoginRespond);
+    rpc Login(LoginRequest) returns (LoginResponse);
 }
 
 // The request message containing the user's name.
@@ -42,8 +42,15 @@ message UserData {
      string gender = 5;
 }
 
-message LoginRespond {
+// message LoginRespond {
+//      bool success=1;
+//      string token=2;
+//      string message=3;
+// }
+
+message LoginResponse {
      bool success=1;
      string token=2;
+     string message=3;
 }
 

@@ -14,6 +14,6 @@ const sequelize = new Sequelize({
 
 
 
-export async function init() {
-    await sequelize.sync({ force: true });
+export async function init() {    
+    // await sequelize.sync({ force: false });
 }

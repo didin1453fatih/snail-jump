@@ -1,4 +1,6 @@
-import { GetMyAccountRequest, UserData, LoginRequest, LoginRespond } from './../../proto_bin_web/user/user_pb.d';
+import { token } from './../model/token.model';
+import random from 'crypto-random-string'
+import { GetMyAccountRequest, UserData, LoginRequest, LoginResponse } from './../../proto_bin/user/user_pb';
 import { user } from './../model/user.model';
 import * as grpc from 'grpc';
 
@@ -10,21 +12,31 @@ class UserHandler implements IUserServer {
     // login: grpc.handleUnaryCall<import("../../proto_bin/user/user_pb").LoginRequest, import("../../proto_bin/user/user_pb").LoginRespond>;
     // registration: grpc.handleUnaryCall<RegistrationRequest, RegistrationResponse>;
 
-    login = async (data: grpc.ServerUnaryCall<LoginRequest>, callback: grpc.sendUnaryData<LoginRespond>) => {
+    login = async (data: grpc.ServerUnaryCall<LoginRequest>, callback: grpc.sendUnaryData<LoginResponse>) => {
         console.log('login data ' + JSON.stringify(data.request.toObject()))
-        console.log('email fetch '+data.request.getEmail())
+        console.log('email fetch ' + data.request.getEmail())
         var userDB = await user.findOne({
             where: {
                 email: data.request.getEmail()
             }
         })
-        console.log('user yee '+JSON.stringify(userDB))
+        console.log('user yee ' + JSON.stringify(userDB))
         if (userDB !== null) {
-            // var reply = new LoginRespond()
-            // reply.setSuccess(true)
-            // reply.setToken()
-            // return callback(null, reply);
+            var keyToken = random({ length: 20 })
+            await token.create({
+                token: keyToken,
+                userId: userDB.id
+            })
+            const reply = new LoginResponse()
+            reply.setSuccess(true)
+            reply.setToken(keyToken)
+            return callback(null, reply);
         } else {
+            const reply = new LoginResponse()
+            reply.setSuccess(false)
+            reply.setToken(keyToken)
+            reply.setMessage('something failure')
+            return callback(null, reply);
 
         }
 
