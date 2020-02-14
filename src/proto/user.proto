@@ -13,7 +13,8 @@ message RegistrationRequest {
      string username = 1;
      string email = 2;
      string password = 3;
-     string gender = 4;
+     string confirmPassword=4;
+     string gender = 5;
 }
 
 // The response message containing the greetings
