@@ -7,6 +7,7 @@ service User {
     // Sends a greeting
     rpc Registration (RegistrationRequest) returns (RegistrationResponse);
     rpc GetMyAccount (GetMyAccountRequest) returns (UserData);
+    rpc updateAccount(UpdateAccountRequest) returns(UpdateAccountResponse);
     rpc Login(LoginRequest) returns (LoginResponse);
 }
 
@@ -17,6 +18,20 @@ message RegistrationRequest {
      string password = 3;
      string confirmPassword=4;
      string gender = 5;
+}
+
+message UpdateAccountRequest {
+
+}
+
+message UpdateAccountResponse {
+     int32 id=1;
+     string username = 2;
+     string email = 3;
+     string password = 4;
+     string gender = 5;
+     string createdAt= 6;
+     string updatedAt= 7;
 }
 
 // The response message containing the greetings
