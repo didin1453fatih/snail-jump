@@ -6,7 +6,7 @@ package grpc.user;
 service User {
     // Sends a greeting
     rpc Registration (RegistrationRequest) returns (RegistrationResponse);
-    rpc GetMyAccount () returns (UserData);
+    rpc GetMyAccount (GetMyAccountRequest) returns (UserData);
     rpc Login(LoginRequest) returns (LoginResponse);
 }
 
@@ -26,7 +26,6 @@ message RegistrationResponse {
 }
 
 message GetMyAccountRequest{
-     string email = 1;
 }
 
 
