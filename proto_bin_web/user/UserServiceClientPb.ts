@@ -10,6 +10,8 @@
 import * as grpcWeb from 'grpc-web';
 
 import {
+  ChangePasswordRequest,
+  ChangePasswordResponse,
   GetMyAccountRequest,
   LoginRequest,
   LoginResponse,
@@ -36,6 +38,28 @@ export class UserClient {
     this.hostname_ = hostname;
     this.credentials_ = credentials;
     this.options_ = options;
+  }
+
+  methodInfoChangePassword = new grpcWeb.AbstractClientBase.MethodInfo(
+    ChangePasswordResponse,
+    (request: ChangePasswordRequest) => {
+      return request.serializeBinary();
+    },
+    ChangePasswordResponse.deserializeBinary
+  );
+
+  changePassword(
+    request: ChangePasswordRequest,
+    metadata: grpcWeb.Metadata | null,
+    callback: (err: grpcWeb.Error,
+               response: ChangePasswordResponse) => void) {
+    return this.client_.rpcCall(
+      this.hostname_ +
+        '/grpc.user.User/ChangePassword',
+      request,
+      metadata || {},
+      this.methodInfoChangePassword,
+      callback);
   }
 
   methodInfoRegistration = new grpcWeb.AbstractClientBase.MethodInfo(

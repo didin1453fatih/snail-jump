@@ -4,6 +4,28 @@
 var grpc = require('grpc');
 var user_pb = require('./user_pb.js');
 
+function serialize_grpc_user_ChangePasswordRequest(arg) {
+  if (!(arg instanceof user_pb.ChangePasswordRequest)) {
+    throw new Error('Expected argument of type grpc.user.ChangePasswordRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_grpc_user_ChangePasswordRequest(buffer_arg) {
+  return user_pb.ChangePasswordRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_grpc_user_ChangePasswordResponse(arg) {
+  if (!(arg instanceof user_pb.ChangePasswordResponse)) {
+    throw new Error('Expected argument of type grpc.user.ChangePasswordResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_grpc_user_ChangePasswordResponse(buffer_arg) {
+  return user_pb.ChangePasswordResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_grpc_user_GetMyAccountRequest(arg) {
   if (!(arg instanceof user_pb.GetMyAccountRequest)) {
     throw new Error('Expected argument of type grpc.user.GetMyAccountRequest');
@@ -96,7 +118,18 @@ function deserialize_grpc_user_UserData(buffer_arg) {
 // The greeting service definition.
 var UserService = exports.UserService = {
   // Sends a greeting
-registration: {
+changePassword: {
+    path: '/grpc.user.User/ChangePassword',
+    requestStream: false,
+    responseStream: false,
+    requestType: user_pb.ChangePasswordRequest,
+    responseType: user_pb.ChangePasswordResponse,
+    requestSerialize: serialize_grpc_user_ChangePasswordRequest,
+    requestDeserialize: deserialize_grpc_user_ChangePasswordRequest,
+    responseSerialize: serialize_grpc_user_ChangePasswordResponse,
+    responseDeserialize: deserialize_grpc_user_ChangePasswordResponse,
+  },
+  registration: {
     path: '/grpc.user.User/Registration',
     requestStream: false,
     responseStream: false,

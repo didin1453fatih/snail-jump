@@ -70,6 +70,86 @@ proto.grpc.user.UserPromiseClient =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
+ *   !proto.grpc.user.ChangePasswordRequest,
+ *   !proto.grpc.user.ChangePasswordResponse>}
+ */
+const methodDescriptor_User_ChangePassword = new grpc.web.MethodDescriptor(
+  '/grpc.user.User/ChangePassword',
+  grpc.web.MethodType.UNARY,
+  proto.grpc.user.ChangePasswordRequest,
+  proto.grpc.user.ChangePasswordResponse,
+  /**
+   * @param {!proto.grpc.user.ChangePasswordRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.grpc.user.ChangePasswordResponse.deserializeBinary
+);
+
+
+/**
+ * @const
+ * @type {!grpc.web.AbstractClientBase.MethodInfo<
+ *   !proto.grpc.user.ChangePasswordRequest,
+ *   !proto.grpc.user.ChangePasswordResponse>}
+ */
+const methodInfo_User_ChangePassword = new grpc.web.AbstractClientBase.MethodInfo(
+  proto.grpc.user.ChangePasswordResponse,
+  /**
+   * @param {!proto.grpc.user.ChangePasswordRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.grpc.user.ChangePasswordResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.grpc.user.ChangePasswordRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.Error, ?proto.grpc.user.ChangePasswordResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.grpc.user.ChangePasswordResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.grpc.user.UserClient.prototype.changePassword =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/grpc.user.User/ChangePassword',
+      request,
+      metadata || {},
+      methodDescriptor_User_ChangePassword,
+      callback);
+};
+
+
+/**
+ * @param {!proto.grpc.user.ChangePasswordRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.grpc.user.ChangePasswordResponse>}
+ *     A native promise that resolves to the response
+ */
+proto.grpc.user.UserPromiseClient.prototype.changePassword =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/grpc.user.User/ChangePassword',
+      request,
+      metadata || {},
+      methodDescriptor_User_ChangePassword);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
  *   !proto.grpc.user.RegistrationRequest,
  *   !proto.grpc.user.RegistrationResponse>}
  */

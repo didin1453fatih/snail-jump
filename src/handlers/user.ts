@@ -10,6 +10,7 @@ import { UserService, IUserServer } from '../../proto_bin/user/user_grpc_pb';
 import bcrypt from "bcrypt"
 
 class UserHandler implements IUserServer {
+    changePassword: grpc.handleUnaryCall<import("../../proto_bin/user/user_pb").ChangePasswordRequest, import("../../proto_bin/user/user_pb").ChangePasswordResponse>;
     // updateAccount: grpc.handleUnaryCall<import("../../proto_bin/user/user_pb").UpdateAccountRequest, import("../../proto_bin/user/user_pb").UpdateAccountResponse>;
 
     updateAccount = async (data: grpc.ServerUnaryCall<UpdateAccountRequest>, callback: grpc.sendUnaryData<UpdateAccountResponse>): Promise<void> => {
@@ -64,6 +65,7 @@ class UserHandler implements IUserServer {
             if(userUpdatingRespond[0]===1){
                 const userUpdatedDB= await user.findByPk(userDB.id);
                 reply.setSuccess(true);
+                reply.setId(userUpdatedDB.id);                
                 reply.setUsername(userUpdatedDB.username);
                 reply.setEmail(userUpdatedDB.email);                
                 reply.setGender(userUpdatedDB.gender);

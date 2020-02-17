@@ -8,12 +8,22 @@ import * as grpc from "grpc";
 import * as user_pb from "./user_pb";
 
 interface IUserService extends grpc.ServiceDefinition<grpc.UntypedServiceImplementation> {
+    changePassword: IUserService_IChangePassword;
     registration: IUserService_IRegistration;
     getMyAccount: IUserService_IGetMyAccount;
     updateAccount: IUserService_IupdateAccount;
     login: IUserService_ILogin;
 }
 
+interface IUserService_IChangePassword extends grpc.MethodDefinition<user_pb.ChangePasswordRequest, user_pb.ChangePasswordResponse> {
+    path: string; // "/grpc.user.User/ChangePassword"
+    requestStream: boolean; // false
+    responseStream: boolean; // false
+    requestSerialize: grpc.serialize<user_pb.ChangePasswordRequest>;
+    requestDeserialize: grpc.deserialize<user_pb.ChangePasswordRequest>;
+    responseSerialize: grpc.serialize<user_pb.ChangePasswordResponse>;
+    responseDeserialize: grpc.deserialize<user_pb.ChangePasswordResponse>;
+}
 interface IUserService_IRegistration extends grpc.MethodDefinition<user_pb.RegistrationRequest, user_pb.RegistrationResponse> {
     path: string; // "/grpc.user.User/Registration"
     requestStream: boolean; // false
@@ -54,6 +64,7 @@ interface IUserService_ILogin extends grpc.MethodDefinition<user_pb.LoginRequest
 export const UserService: IUserService;
 
 export interface IUserServer {
+    changePassword: grpc.handleUnaryCall<user_pb.ChangePasswordRequest, user_pb.ChangePasswordResponse>;
     registration: grpc.handleUnaryCall<user_pb.RegistrationRequest, user_pb.RegistrationResponse>;
     getMyAccount: grpc.handleUnaryCall<user_pb.GetMyAccountRequest, user_pb.UserData>;
     updateAccount: grpc.handleUnaryCall<user_pb.UpdateAccountRequest, user_pb.UpdateAccountResponse>;
@@ -61,6 +72,9 @@ export interface IUserServer {
 }
 
 export interface IUserClient {
+    changePassword(request: user_pb.ChangePasswordRequest, callback: (error: grpc.ServiceError | null, response: user_pb.ChangePasswordResponse) => void): grpc.ClientUnaryCall;
+    changePassword(request: user_pb.ChangePasswordRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: user_pb.ChangePasswordResponse) => void): grpc.ClientUnaryCall;
+    changePassword(request: user_pb.ChangePasswordRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: user_pb.ChangePasswordResponse) => void): grpc.ClientUnaryCall;
     registration(request: user_pb.RegistrationRequest, callback: (error: grpc.ServiceError | null, response: user_pb.RegistrationResponse) => void): grpc.ClientUnaryCall;
     registration(request: user_pb.RegistrationRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: user_pb.RegistrationResponse) => void): grpc.ClientUnaryCall;
     registration(request: user_pb.RegistrationRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: user_pb.RegistrationResponse) => void): grpc.ClientUnaryCall;
@@ -77,6 +91,9 @@ export interface IUserClient {
 
 export class UserClient extends grpc.Client implements IUserClient {
     constructor(address: string, credentials: grpc.ChannelCredentials, options?: object);
+    public changePassword(request: user_pb.ChangePasswordRequest, callback: (error: grpc.ServiceError | null, response: user_pb.ChangePasswordResponse) => void): grpc.ClientUnaryCall;
+    public changePassword(request: user_pb.ChangePasswordRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: user_pb.ChangePasswordResponse) => void): grpc.ClientUnaryCall;
+    public changePassword(request: user_pb.ChangePasswordRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: user_pb.ChangePasswordResponse) => void): grpc.ClientUnaryCall;
     public registration(request: user_pb.RegistrationRequest, callback: (error: grpc.ServiceError | null, response: user_pb.RegistrationResponse) => void): grpc.ClientUnaryCall;
     public registration(request: user_pb.RegistrationRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: user_pb.RegistrationResponse) => void): grpc.ClientUnaryCall;
     public registration(request: user_pb.RegistrationRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: user_pb.RegistrationResponse) => void): grpc.ClientUnaryCall;

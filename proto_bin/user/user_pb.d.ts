@@ -6,6 +6,56 @@
 
 import * as jspb from "google-protobuf";
 
+export class ChangePasswordRequest extends jspb.Message { 
+    getPassword(): string;
+    setPassword(value: string): void;
+
+    getConfirmpassword(): string;
+    setConfirmpassword(value: string): void;
+
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): ChangePasswordRequest.AsObject;
+    static toObject(includeInstance: boolean, msg: ChangePasswordRequest): ChangePasswordRequest.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: ChangePasswordRequest, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): ChangePasswordRequest;
+    static deserializeBinaryFromReader(message: ChangePasswordRequest, reader: jspb.BinaryReader): ChangePasswordRequest;
+}
+
+export namespace ChangePasswordRequest {
+    export type AsObject = {
+        password: string,
+        confirmpassword: string,
+    }
+}
+
+export class ChangePasswordResponse extends jspb.Message { 
+    getSuccess(): boolean;
+    setSuccess(value: boolean): void;
+
+    getMessage(): string;
+    setMessage(value: string): void;
+
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): ChangePasswordResponse.AsObject;
+    static toObject(includeInstance: boolean, msg: ChangePasswordResponse): ChangePasswordResponse.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: ChangePasswordResponse, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): ChangePasswordResponse;
+    static deserializeBinaryFromReader(message: ChangePasswordResponse, reader: jspb.BinaryReader): ChangePasswordResponse;
+}
+
+export namespace ChangePasswordResponse {
+    export type AsObject = {
+        success: boolean,
+        message: string,
+    }
+}
+
 export class RegistrationRequest extends jspb.Message { 
     getUsername(): string;
     setUsername(value: string): void;
@@ -50,12 +100,6 @@ export class UpdateAccountRequest extends jspb.Message {
     getEmail(): string;
     setEmail(value: string): void;
 
-    getPassword(): string;
-    setPassword(value: string): void;
-
-    getConfirmpassword(): string;
-    setConfirmpassword(value: string): void;
-
     getGender(): string;
     setGender(value: string): void;
 
@@ -74,8 +118,6 @@ export namespace UpdateAccountRequest {
     export type AsObject = {
         username: string,
         email: string,
-        password: string,
-        confirmpassword: string,
         gender: string,
     }
 }
@@ -95,9 +137,6 @@ export class UpdateAccountResponse extends jspb.Message {
 
     getEmail(): string;
     setEmail(value: string): void;
-
-    getPassword(): string;
-    setPassword(value: string): void;
 
     getGender(): string;
     setGender(value: string): void;
@@ -126,7 +165,6 @@ export namespace UpdateAccountResponse {
         id: number,
         username: string,
         email: string,
-        password: string,
         gender: string,
         createdat: string,
         updatedat: string,
