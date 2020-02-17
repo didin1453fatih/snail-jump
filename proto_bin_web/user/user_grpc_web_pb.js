@@ -230,6 +230,86 @@ proto.grpc.user.UserPromiseClient.prototype.getMyAccount =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
+ *   !proto.grpc.user.UpdateAccountRequest,
+ *   !proto.grpc.user.UpdateAccountResponse>}
+ */
+const methodDescriptor_User_updateAccount = new grpc.web.MethodDescriptor(
+  '/grpc.user.User/updateAccount',
+  grpc.web.MethodType.UNARY,
+  proto.grpc.user.UpdateAccountRequest,
+  proto.grpc.user.UpdateAccountResponse,
+  /**
+   * @param {!proto.grpc.user.UpdateAccountRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.grpc.user.UpdateAccountResponse.deserializeBinary
+);
+
+
+/**
+ * @const
+ * @type {!grpc.web.AbstractClientBase.MethodInfo<
+ *   !proto.grpc.user.UpdateAccountRequest,
+ *   !proto.grpc.user.UpdateAccountResponse>}
+ */
+const methodInfo_User_updateAccount = new grpc.web.AbstractClientBase.MethodInfo(
+  proto.grpc.user.UpdateAccountResponse,
+  /**
+   * @param {!proto.grpc.user.UpdateAccountRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.grpc.user.UpdateAccountResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.grpc.user.UpdateAccountRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.Error, ?proto.grpc.user.UpdateAccountResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.grpc.user.UpdateAccountResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.grpc.user.UserClient.prototype.updateAccount =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/grpc.user.User/updateAccount',
+      request,
+      metadata || {},
+      methodDescriptor_User_updateAccount,
+      callback);
+};
+
+
+/**
+ * @param {!proto.grpc.user.UpdateAccountRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.grpc.user.UpdateAccountResponse>}
+ *     A native promise that resolves to the response
+ */
+proto.grpc.user.UserPromiseClient.prototype.updateAccount =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/grpc.user.User/updateAccount',
+      request,
+      metadata || {},
+      methodDescriptor_User_updateAccount);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
  *   !proto.grpc.user.LoginRequest,
  *   !proto.grpc.user.LoginResponse>}
  */

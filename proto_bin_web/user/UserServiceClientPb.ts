@@ -15,6 +15,8 @@ import {
   LoginResponse,
   RegistrationRequest,
   RegistrationResponse,
+  UpdateAccountRequest,
+  UpdateAccountResponse,
   UserData} from './user_pb';
 
 export class UserClient {
@@ -77,6 +79,28 @@ export class UserClient {
       request,
       metadata || {},
       this.methodInfoGetMyAccount,
+      callback);
+  }
+
+  methodInfoupdateAccount = new grpcWeb.AbstractClientBase.MethodInfo(
+    UpdateAccountResponse,
+    (request: UpdateAccountRequest) => {
+      return request.serializeBinary();
+    },
+    UpdateAccountResponse.deserializeBinary
+  );
+
+  updateAccount(
+    request: UpdateAccountRequest,
+    metadata: grpcWeb.Metadata | null,
+    callback: (err: grpcWeb.Error,
+               response: UpdateAccountResponse) => void) {
+    return this.client_.rpcCall(
+      this.hostname_ +
+        '/grpc.user.User/updateAccount',
+      request,
+      metadata || {},
+      this.methodInfoupdateAccount,
       callback);
   }
 

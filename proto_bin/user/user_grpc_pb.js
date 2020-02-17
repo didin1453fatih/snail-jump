@@ -59,6 +59,28 @@ function deserialize_grpc_user_RegistrationResponse(buffer_arg) {
   return user_pb.RegistrationResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_grpc_user_UpdateAccountRequest(arg) {
+  if (!(arg instanceof user_pb.UpdateAccountRequest)) {
+    throw new Error('Expected argument of type grpc.user.UpdateAccountRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_grpc_user_UpdateAccountRequest(buffer_arg) {
+  return user_pb.UpdateAccountRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_grpc_user_UpdateAccountResponse(arg) {
+  if (!(arg instanceof user_pb.UpdateAccountResponse)) {
+    throw new Error('Expected argument of type grpc.user.UpdateAccountResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_grpc_user_UpdateAccountResponse(buffer_arg) {
+  return user_pb.UpdateAccountResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_grpc_user_UserData(arg) {
   if (!(arg instanceof user_pb.UserData)) {
     throw new Error('Expected argument of type grpc.user.UserData');
@@ -95,6 +117,17 @@ registration: {
     requestDeserialize: deserialize_grpc_user_GetMyAccountRequest,
     responseSerialize: serialize_grpc_user_UserData,
     responseDeserialize: deserialize_grpc_user_UserData,
+  },
+  updateAccount: {
+    path: '/grpc.user.User/updateAccount',
+    requestStream: false,
+    responseStream: false,
+    requestType: user_pb.UpdateAccountRequest,
+    responseType: user_pb.UpdateAccountResponse,
+    requestSerialize: serialize_grpc_user_UpdateAccountRequest,
+    requestDeserialize: deserialize_grpc_user_UpdateAccountRequest,
+    responseSerialize: serialize_grpc_user_UpdateAccountResponse,
+    responseDeserialize: deserialize_grpc_user_UpdateAccountResponse,
   },
   login: {
     path: '/grpc.user.User/Login',

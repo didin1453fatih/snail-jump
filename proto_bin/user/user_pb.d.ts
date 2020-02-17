@@ -43,6 +43,68 @@ export namespace RegistrationRequest {
     }
 }
 
+export class UpdateAccountRequest extends jspb.Message { 
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): UpdateAccountRequest.AsObject;
+    static toObject(includeInstance: boolean, msg: UpdateAccountRequest): UpdateAccountRequest.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: UpdateAccountRequest, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): UpdateAccountRequest;
+    static deserializeBinaryFromReader(message: UpdateAccountRequest, reader: jspb.BinaryReader): UpdateAccountRequest;
+}
+
+export namespace UpdateAccountRequest {
+    export type AsObject = {
+    }
+}
+
+export class UpdateAccountResponse extends jspb.Message { 
+    getId(): number;
+    setId(value: number): void;
+
+    getUsername(): string;
+    setUsername(value: string): void;
+
+    getEmail(): string;
+    setEmail(value: string): void;
+
+    getPassword(): string;
+    setPassword(value: string): void;
+
+    getGender(): string;
+    setGender(value: string): void;
+
+    getCreatedat(): string;
+    setCreatedat(value: string): void;
+
+    getUpdatedat(): string;
+    setUpdatedat(value: string): void;
+
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): UpdateAccountResponse.AsObject;
+    static toObject(includeInstance: boolean, msg: UpdateAccountResponse): UpdateAccountResponse.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: UpdateAccountResponse, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): UpdateAccountResponse;
+    static deserializeBinaryFromReader(message: UpdateAccountResponse, reader: jspb.BinaryReader): UpdateAccountResponse;
+}
+
+export namespace UpdateAccountResponse {
+    export type AsObject = {
+        id: number,
+        username: string,
+        email: string,
+        password: string,
+        gender: string,
+        createdat: string,
+        updatedat: string,
+    }
+}
+
 export class RegistrationResponse extends jspb.Message { 
     getSuccess(): boolean;
     setSuccess(value: boolean): void;
