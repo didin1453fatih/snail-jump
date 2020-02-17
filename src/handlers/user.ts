@@ -5,13 +5,49 @@ import { GetMyAccountRequest, UserData, LoginRequest, LoginResponse, UpdateAccou
 import { user } from './../model/user.model';
 import * as grpc from 'grpc';
 
-import { RegistrationRequest, RegistrationResponse } from '../../proto_bin/user/user_pb';
+import { RegistrationRequest, RegistrationResponse, ChangePasswordRequest, ChangePasswordResponse } from '../../proto_bin/user/user_pb';
 import { UserService, IUserServer } from '../../proto_bin/user/user_grpc_pb';
 import bcrypt from "bcrypt"
 
 class UserHandler implements IUserServer {
-    changePassword: grpc.handleUnaryCall<import("../../proto_bin/user/user_pb").ChangePasswordRequest, import("../../proto_bin/user/user_pb").ChangePasswordResponse>;
-    // updateAccount: grpc.handleUnaryCall<import("../../proto_bin/user/user_pb").UpdateAccountRequest, import("../../proto_bin/user/user_pb").UpdateAccountResponse>;
+
+    changePassword = async (data: grpc.ServerUnaryCall<ChangePasswordRequest>, callback: grpc.sendUnaryData<ChangePasswordResponse>): Promise<void> => {
+        console.log('\r\n----------------------------Data coming\r\n')
+        console.log(JSON.stringify(data.request.toObject()))
+
+        var authToken = data.metadata.get('authToken')
+        const tokenDB = await token.findOne({
+            where: {
+                token: authToken
+            }
+        })
+        const userDB = await user.findByPk(tokenDB.userId);
+        if (userDB !== null) {
+            if (data.request.getPassword() === data.request.getConfirmpassword()) {
+                var hashedPassword = bcrypt.hashSync(data.request.getPassword(), 10);
+                user.update({
+                    password: hashedPassword
+                }, {
+                    where: {
+                        id: userDB.id
+                    }
+                })
+                const reply = new ChangePasswordResponse()
+                reply.setSuccess(true);
+                return callback(null, reply)
+            } else {
+                const reply = new ChangePasswordResponse()
+                reply.setSuccess(false);
+                reply.setMessage('Confirmation password not match')
+                return callback(null, reply)
+            }
+        } else {
+            const reply = new ChangePasswordResponse()
+            reply.setSuccess(false);
+            reply.setMessage('Authentication problem')
+            return callback(null, reply)
+        }
+    }
 
     updateAccount = async (data: grpc.ServerUnaryCall<UpdateAccountRequest>, callback: grpc.sendUnaryData<UpdateAccountResponse>): Promise<void> => {
         console.log('\r\n----------------------------Data coming\r\n')
@@ -27,18 +63,9 @@ class UserHandler implements IUserServer {
         if (userDB !== null) {
             var updatedData: {
                 username?: string,
-                // password?: string,
                 email?: string,
                 gender?: string,
             } = {}
-
-            // if (data.request.getPassword() !== null) {
-            //     if (data.request.getPassword() === data.request.getConfirmpassword()) {
-            //         updatedData.password = bcrypt.hashSync(data.request.getPassword(), 10);
-            //     } else {
-            //         return
-            //     }
-            // }
 
             if (data.request.getUsername() !== null) {
                 updatedData.username = data.request.getUsername()
@@ -62,17 +89,17 @@ class UserHandler implements IUserServer {
             console.log(JSON.stringify(userUpdatingRespond))
             const reply = new UpdateAccountResponse()
 
-            if(userUpdatingRespond[0]===1){
-                const userUpdatedDB= await user.findByPk(userDB.id);
+            if (userUpdatingRespond[0] === 1) {
+                const userUpdatedDB = await user.findByPk(userDB.id);
                 reply.setSuccess(true);
-                reply.setId(userUpdatedDB.id);                
+                reply.setId(userUpdatedDB.id);
                 reply.setUsername(userUpdatedDB.username);
-                reply.setEmail(userUpdatedDB.email);                
+                reply.setEmail(userUpdatedDB.email);
                 reply.setGender(userUpdatedDB.gender);
                 reply.setCreatedat(new Date(userUpdatedDB.createdAt).toISOString())
                 reply.setUpdatedat(new Date(userUpdatedDB.updatedAt).toISOString())
                 return callback(null, reply);
-            }else{
+            } else {
                 reply.setSuccess(false);
                 reply.setMessage('Internal update error')
                 return callback(null, reply);
