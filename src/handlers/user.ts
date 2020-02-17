@@ -52,7 +52,23 @@ class UserHandler implements IUserServer {
 
     }
 
-    getMyAccount = (data: grpc.ServerUnaryCall<GetMyAccountRequest>, callback: grpc.sendUnaryData<UserData>): void => {
+    getMyAccount = async (data: grpc.ServerUnaryCall<GetMyAccountRequest>, callback: grpc.sendUnaryData<UserData>): Promise<void> => {
+
+        var authToken = data.metadata.get('authToken')
+        const tokenDB = await token.findOne({
+            where: {
+                token: authToken
+            }
+        })
+        const userDB = await user.findByPk(tokenDB.userId);
+        var userData = new UserData();
+        userData.setCreatedat(new Date(userDB.createdAt).toISOString());
+        userData.setUpdatedat(new Date(userDB.updatedAt).toISOString());
+        userData.setEmail(userDB.email);
+        userData.setUsername(userDB.username);
+        userData.setId(userDB.id);
+        userData.setGender(userDB.gender);
+        return callback(null, userData);
 
     }
 
