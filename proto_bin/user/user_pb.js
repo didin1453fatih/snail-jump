@@ -316,7 +316,11 @@ proto.grpc.user.UpdateAccountRequest.prototype.toObject = function(opt_includeIn
  */
 proto.grpc.user.UpdateAccountRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-
+    username: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    email: jspb.Message.getFieldWithDefault(msg, 3, ""),
+    password: jspb.Message.getFieldWithDefault(msg, 4, ""),
+    confirmpassword: jspb.Message.getFieldWithDefault(msg, 5, ""),
+    gender: jspb.Message.getFieldWithDefault(msg, 6, "")
   };
 
   if (includeInstance) {
@@ -353,6 +357,26 @@ proto.grpc.user.UpdateAccountRequest.deserializeBinaryFromReader = function(msg,
     }
     var field = reader.getFieldNumber();
     switch (field) {
+    case 2:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setUsername(value);
+      break;
+    case 3:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setEmail(value);
+      break;
+    case 4:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setPassword(value);
+      break;
+    case 5:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setConfirmpassword(value);
+      break;
+    case 6:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setGender(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -382,6 +406,116 @@ proto.grpc.user.UpdateAccountRequest.prototype.serializeBinary = function() {
  */
 proto.grpc.user.UpdateAccountRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
+  f = message.getUsername();
+  if (f.length > 0) {
+    writer.writeString(
+      2,
+      f
+    );
+  }
+  f = message.getEmail();
+  if (f.length > 0) {
+    writer.writeString(
+      3,
+      f
+    );
+  }
+  f = message.getPassword();
+  if (f.length > 0) {
+    writer.writeString(
+      4,
+      f
+    );
+  }
+  f = message.getConfirmpassword();
+  if (f.length > 0) {
+    writer.writeString(
+      5,
+      f
+    );
+  }
+  f = message.getGender();
+  if (f.length > 0) {
+    writer.writeString(
+      6,
+      f
+    );
+  }
+};
+
+
+/**
+ * optional string username = 2;
+ * @return {string}
+ */
+proto.grpc.user.UpdateAccountRequest.prototype.getUsername = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+};
+
+
+/** @param {string} value */
+proto.grpc.user.UpdateAccountRequest.prototype.setUsername = function(value) {
+  jspb.Message.setProto3StringField(this, 2, value);
+};
+
+
+/**
+ * optional string email = 3;
+ * @return {string}
+ */
+proto.grpc.user.UpdateAccountRequest.prototype.getEmail = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
+};
+
+
+/** @param {string} value */
+proto.grpc.user.UpdateAccountRequest.prototype.setEmail = function(value) {
+  jspb.Message.setProto3StringField(this, 3, value);
+};
+
+
+/**
+ * optional string password = 4;
+ * @return {string}
+ */
+proto.grpc.user.UpdateAccountRequest.prototype.getPassword = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
+};
+
+
+/** @param {string} value */
+proto.grpc.user.UpdateAccountRequest.prototype.setPassword = function(value) {
+  jspb.Message.setProto3StringField(this, 4, value);
+};
+
+
+/**
+ * optional string confirmPassword = 5;
+ * @return {string}
+ */
+proto.grpc.user.UpdateAccountRequest.prototype.getConfirmpassword = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 5, ""));
+};
+
+
+/** @param {string} value */
+proto.grpc.user.UpdateAccountRequest.prototype.setConfirmpassword = function(value) {
+  jspb.Message.setProto3StringField(this, 5, value);
+};
+
+
+/**
+ * optional string gender = 6;
+ * @return {string}
+ */
+proto.grpc.user.UpdateAccountRequest.prototype.getGender = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 6, ""));
+};
+
+
+/** @param {string} value */
+proto.grpc.user.UpdateAccountRequest.prototype.setGender = function(value) {
+  jspb.Message.setProto3StringField(this, 6, value);
 };
 
 
@@ -432,6 +566,8 @@ proto.grpc.user.UpdateAccountResponse.prototype.toObject = function(opt_includeI
  */
 proto.grpc.user.UpdateAccountResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
+    success: jspb.Message.getFieldWithDefault(msg, 11, false),
+    message: jspb.Message.getFieldWithDefault(msg, 12, ""),
     id: jspb.Message.getFieldWithDefault(msg, 1, 0),
     username: jspb.Message.getFieldWithDefault(msg, 2, ""),
     email: jspb.Message.getFieldWithDefault(msg, 3, ""),
@@ -475,6 +611,14 @@ proto.grpc.user.UpdateAccountResponse.deserializeBinaryFromReader = function(msg
     }
     var field = reader.getFieldNumber();
     switch (field) {
+    case 11:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setSuccess(value);
+      break;
+    case 12:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setMessage(value);
+      break;
     case 1:
       var value = /** @type {number} */ (reader.readInt32());
       msg.setId(value);
@@ -532,6 +676,20 @@ proto.grpc.user.UpdateAccountResponse.prototype.serializeBinary = function() {
  */
 proto.grpc.user.UpdateAccountResponse.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
+  f = message.getSuccess();
+  if (f) {
+    writer.writeBool(
+      11,
+      f
+    );
+  }
+  f = message.getMessage();
+  if (f.length > 0) {
+    writer.writeString(
+      12,
+      f
+    );
+  }
   f = message.getId();
   if (f !== 0) {
     writer.writeInt32(
@@ -581,6 +739,38 @@ proto.grpc.user.UpdateAccountResponse.serializeBinaryToWriter = function(message
       f
     );
   }
+};
+
+
+/**
+ * optional bool success = 11;
+ * Note that Boolean fields may be set to 0/1 when serialized from a Java server.
+ * You should avoid comparisons like {@code val === true/false} in those cases.
+ * @return {boolean}
+ */
+proto.grpc.user.UpdateAccountResponse.prototype.getSuccess = function() {
+  return /** @type {boolean} */ (jspb.Message.getFieldWithDefault(this, 11, false));
+};
+
+
+/** @param {boolean} value */
+proto.grpc.user.UpdateAccountResponse.prototype.setSuccess = function(value) {
+  jspb.Message.setProto3BooleanField(this, 11, value);
+};
+
+
+/**
+ * optional string message = 12;
+ * @return {string}
+ */
+proto.grpc.user.UpdateAccountResponse.prototype.getMessage = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 12, ""));
+};
+
+
+/** @param {string} value */
+proto.grpc.user.UpdateAccountResponse.prototype.setMessage = function(value) {
+  jspb.Message.setProto3StringField(this, 12, value);
 };
 
 

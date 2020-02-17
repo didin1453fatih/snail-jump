@@ -44,6 +44,21 @@ export namespace RegistrationRequest {
 }
 
 export class UpdateAccountRequest extends jspb.Message { 
+    getUsername(): string;
+    setUsername(value: string): void;
+
+    getEmail(): string;
+    setEmail(value: string): void;
+
+    getPassword(): string;
+    setPassword(value: string): void;
+
+    getConfirmpassword(): string;
+    setConfirmpassword(value: string): void;
+
+    getGender(): string;
+    setGender(value: string): void;
+
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): UpdateAccountRequest.AsObject;
@@ -57,10 +72,21 @@ export class UpdateAccountRequest extends jspb.Message {
 
 export namespace UpdateAccountRequest {
     export type AsObject = {
+        username: string,
+        email: string,
+        password: string,
+        confirmpassword: string,
+        gender: string,
     }
 }
 
 export class UpdateAccountResponse extends jspb.Message { 
+    getSuccess(): boolean;
+    setSuccess(value: boolean): void;
+
+    getMessage(): string;
+    setMessage(value: string): void;
+
     getId(): number;
     setId(value: number): void;
 
@@ -95,6 +121,8 @@ export class UpdateAccountResponse extends jspb.Message {
 
 export namespace UpdateAccountResponse {
     export type AsObject = {
+        success: boolean,
+        message: string,
         id: number,
         username: string,
         email: string,
