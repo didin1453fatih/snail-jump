@@ -6,6 +6,48 @@
 
 import * as jspb from "google-protobuf";
 
+export class LogOutRequest extends jspb.Message { 
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): LogOutRequest.AsObject;
+    static toObject(includeInstance: boolean, msg: LogOutRequest): LogOutRequest.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: LogOutRequest, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): LogOutRequest;
+    static deserializeBinaryFromReader(message: LogOutRequest, reader: jspb.BinaryReader): LogOutRequest;
+}
+
+export namespace LogOutRequest {
+    export type AsObject = {
+    }
+}
+
+export class LogOutResponse extends jspb.Message { 
+    getSuccess(): boolean;
+    setSuccess(value: boolean): void;
+
+    getMessage(): string;
+    setMessage(value: string): void;
+
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): LogOutResponse.AsObject;
+    static toObject(includeInstance: boolean, msg: LogOutResponse): LogOutResponse.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: LogOutResponse, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): LogOutResponse;
+    static deserializeBinaryFromReader(message: LogOutResponse, reader: jspb.BinaryReader): LogOutResponse;
+}
+
+export namespace LogOutResponse {
+    export type AsObject = {
+        success: boolean,
+        message: string,
+    }
+}
+
 export class ChangePasswordRequest extends jspb.Message { 
     getPassword(): string;
     setPassword(value: string): void;

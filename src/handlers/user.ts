@@ -1,7 +1,16 @@
 // import { UpdateAccountResponse } from './../../proto_bin/user/user_pb.d';
 import { token } from './../model/token.model';
 import random from 'crypto-random-string'
-import { GetMyAccountRequest, UserData, LoginRequest, LoginResponse, UpdateAccountRequest, UpdateAccountResponse } from './../../proto_bin/user/user_pb';
+import {
+    GetMyAccountRequest,
+    UserData,
+    LoginRequest,
+    LoginResponse,
+    UpdateAccountRequest,
+    UpdateAccountResponse,
+    LogOutRequest,
+    LogOutResponse,
+} from './../../proto_bin/user/user_pb';
 import { user } from './../model/user.model';
 import * as grpc from 'grpc';
 
@@ -10,6 +19,20 @@ import { UserService, IUserServer } from '../../proto_bin/user/user_grpc_pb';
 import bcrypt from "bcrypt"
 
 class UserHandler implements IUserServer {
+    logOut = async (data: grpc.ServerUnaryCall<LogOutRequest>, callback: grpc.sendUnaryData<LogOutResponse>): Promise<void> => {
+        var authToken = data.metadata.get('authToken')
+        console.log(authToken)
+        var tokenResponse = await token.destroy({
+            where: {
+                token: authToken
+            }
+        })
+        console.log(JSON.stringify(tokenResponse))
+        const reply = new LogOutResponse()
+        reply.setSuccess(true);
+        reply.setMessage('Logout success')
+        return callback(null, reply)
+    }
 
     changePassword = async (data: grpc.ServerUnaryCall<ChangePasswordRequest>, callback: grpc.sendUnaryData<ChangePasswordResponse>): Promise<void> => {
         console.log('\r\n----------------------------Data coming\r\n')

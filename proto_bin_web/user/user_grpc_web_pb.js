@@ -70,6 +70,86 @@ proto.grpc.user.UserPromiseClient =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
+ *   !proto.grpc.user.LogOutRequest,
+ *   !proto.grpc.user.LogOutResponse>}
+ */
+const methodDescriptor_User_LogOut = new grpc.web.MethodDescriptor(
+  '/grpc.user.User/LogOut',
+  grpc.web.MethodType.UNARY,
+  proto.grpc.user.LogOutRequest,
+  proto.grpc.user.LogOutResponse,
+  /**
+   * @param {!proto.grpc.user.LogOutRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.grpc.user.LogOutResponse.deserializeBinary
+);
+
+
+/**
+ * @const
+ * @type {!grpc.web.AbstractClientBase.MethodInfo<
+ *   !proto.grpc.user.LogOutRequest,
+ *   !proto.grpc.user.LogOutResponse>}
+ */
+const methodInfo_User_LogOut = new grpc.web.AbstractClientBase.MethodInfo(
+  proto.grpc.user.LogOutResponse,
+  /**
+   * @param {!proto.grpc.user.LogOutRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.grpc.user.LogOutResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.grpc.user.LogOutRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.Error, ?proto.grpc.user.LogOutResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.grpc.user.LogOutResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.grpc.user.UserClient.prototype.logOut =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/grpc.user.User/LogOut',
+      request,
+      metadata || {},
+      methodDescriptor_User_LogOut,
+      callback);
+};
+
+
+/**
+ * @param {!proto.grpc.user.LogOutRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.grpc.user.LogOutResponse>}
+ *     A native promise that resolves to the response
+ */
+proto.grpc.user.UserPromiseClient.prototype.logOut =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/grpc.user.User/LogOut',
+      request,
+      metadata || {},
+      methodDescriptor_User_LogOut);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
  *   !proto.grpc.user.ChangePasswordRequest,
  *   !proto.grpc.user.ChangePasswordResponse>}
  */

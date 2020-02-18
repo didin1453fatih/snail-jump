@@ -13,6 +13,8 @@ import {
   ChangePasswordRequest,
   ChangePasswordResponse,
   GetMyAccountRequest,
+  LogOutRequest,
+  LogOutResponse,
   LoginRequest,
   LoginResponse,
   RegistrationRequest,
@@ -38,6 +40,28 @@ export class UserClient {
     this.hostname_ = hostname;
     this.credentials_ = credentials;
     this.options_ = options;
+  }
+
+  methodInfoLogOut = new grpcWeb.AbstractClientBase.MethodInfo(
+    LogOutResponse,
+    (request: LogOutRequest) => {
+      return request.serializeBinary();
+    },
+    LogOutResponse.deserializeBinary
+  );
+
+  logOut(
+    request: LogOutRequest,
+    metadata: grpcWeb.Metadata | null,
+    callback: (err: grpcWeb.Error,
+               response: LogOutResponse) => void) {
+    return this.client_.rpcCall(
+      this.hostname_ +
+        '/grpc.user.User/LogOut',
+      request,
+      metadata || {},
+      this.methodInfoLogOut,
+      callback);
   }
 
   methodInfoChangePassword = new grpcWeb.AbstractClientBase.MethodInfo(

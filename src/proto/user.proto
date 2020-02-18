@@ -5,12 +5,22 @@ package grpc.user;
 // The greeting service definition.
 service User {
     // Sends a greeting
+    rpc LogOut(LogOutRequest) returns (LogOutResponse);
     rpc ChangePassword (ChangePasswordRequest) returns (ChangePasswordResponse);
     rpc Registration (RegistrationRequest) returns (RegistrationResponse);
     rpc GetMyAccount (GetMyAccountRequest) returns (UserData);
     rpc updateAccount(UpdateAccountRequest) returns(UpdateAccountResponse);
     rpc Login(LoginRequest) returns (LoginResponse);
 }
+message LogOutRequest{
+
+}
+
+message LogOutResponse{
+     bool success=1;
+     string message=2;
+}
+
 message ChangePasswordRequest{
      string password = 4;
      string confirmPassword=5;
