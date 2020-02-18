@@ -37,6 +37,17 @@ function deserialize_grpc_user_GetMyAccountRequest(buffer_arg) {
   return user_pb.GetMyAccountRequest.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_grpc_user_GetMyAccountResponse(arg) {
+  if (!(arg instanceof user_pb.GetMyAccountResponse)) {
+    throw new Error('Expected argument of type grpc.user.GetMyAccountResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_grpc_user_GetMyAccountResponse(buffer_arg) {
+  return user_pb.GetMyAccountResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_grpc_user_LogOutRequest(arg) {
   if (!(arg instanceof user_pb.LogOutRequest)) {
     throw new Error('Expected argument of type grpc.user.LogOutRequest');
@@ -125,17 +136,6 @@ function deserialize_grpc_user_UpdateAccountResponse(buffer_arg) {
   return user_pb.UpdateAccountResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
-function serialize_grpc_user_UserData(arg) {
-  if (!(arg instanceof user_pb.UserData)) {
-    throw new Error('Expected argument of type grpc.user.UserData');
-  }
-  return Buffer.from(arg.serializeBinary());
-}
-
-function deserialize_grpc_user_UserData(buffer_arg) {
-  return user_pb.UserData.deserializeBinary(new Uint8Array(buffer_arg));
-}
-
 
 // The greeting service definition.
 var UserService = exports.UserService = {
@@ -178,11 +178,11 @@ logOut: {
     requestStream: false,
     responseStream: false,
     requestType: user_pb.GetMyAccountRequest,
-    responseType: user_pb.UserData,
+    responseType: user_pb.GetMyAccountResponse,
     requestSerialize: serialize_grpc_user_GetMyAccountRequest,
     requestDeserialize: deserialize_grpc_user_GetMyAccountRequest,
-    responseSerialize: serialize_grpc_user_UserData,
-    responseDeserialize: deserialize_grpc_user_UserData,
+    responseSerialize: serialize_grpc_user_GetMyAccountResponse,
+    responseDeserialize: deserialize_grpc_user_GetMyAccountResponse,
   },
   updateAccount: {
     path: '/grpc.user.User/updateAccount',

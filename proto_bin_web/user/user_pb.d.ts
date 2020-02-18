@@ -244,6 +244,56 @@ export namespace LoginRequest {
   }
 }
 
+export class GetMyAccountResponse extends jspb.Message {
+  getSuccess(): boolean;
+  setSuccess(value: boolean): void;
+
+  getMessage(): string;
+  setMessage(value: string): void;
+
+  getId(): number;
+  setId(value: number): void;
+
+  getUsername(): string;
+  setUsername(value: string): void;
+
+  getEmail(): string;
+  setEmail(value: string): void;
+
+  getPassword(): string;
+  setPassword(value: string): void;
+
+  getGender(): string;
+  setGender(value: string): void;
+
+  getCreatedat(): string;
+  setCreatedat(value: string): void;
+
+  getUpdatedat(): string;
+  setUpdatedat(value: string): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): GetMyAccountResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: GetMyAccountResponse): GetMyAccountResponse.AsObject;
+  static serializeBinaryToWriter(message: GetMyAccountResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): GetMyAccountResponse;
+  static deserializeBinaryFromReader(message: GetMyAccountResponse, reader: jspb.BinaryReader): GetMyAccountResponse;
+}
+
+export namespace GetMyAccountResponse {
+  export type AsObject = {
+    success: boolean,
+    message: string,
+    id: number,
+    username: string,
+    email: string,
+    password: string,
+    gender: string,
+    createdat: string,
+    updatedat: string,
+  }
+}
+
 export class UserData extends jspb.Message {
   getId(): number;
   setId(value: number): void;

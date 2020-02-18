@@ -10,6 +10,7 @@ import {
     UpdateAccountResponse,
     LogOutRequest,
     LogOutResponse,
+    GetMyAccountResponse,
 } from './../../proto_bin/user/user_pb';
 import { user } from './../model/user.model';
 import * as grpc from 'grpc';
@@ -187,7 +188,7 @@ class UserHandler implements IUserServer {
 
     }
 
-    getMyAccount = async (data: grpc.ServerUnaryCall<GetMyAccountRequest>, callback: grpc.sendUnaryData<UserData>): Promise<void> => {
+    getMyAccount = async (data: grpc.ServerUnaryCall<GetMyAccountRequest>, callback: grpc.sendUnaryData<GetMyAccountResponse>): Promise<void> => {
 
         var authToken = data.metadata.get('authToken')
         const tokenDB = await token.findOne({
@@ -195,15 +196,30 @@ class UserHandler implements IUserServer {
                 token: authToken
             }
         })
+        if (tokenDB === null) {
+            const reply = new GetMyAccountResponse();
+            reply.setSuccess(false);
+            reply.setMessage('You are not authenticated')
+            return callback(null, reply);
+        }
+
         const userDB = await user.findByPk(tokenDB.userId);
-        var userData = new UserData();
-        userData.setCreatedat(new Date(userDB.createdAt).toISOString());
-        userData.setUpdatedat(new Date(userDB.updatedAt).toISOString());
-        userData.setEmail(userDB.email);
-        userData.setUsername(userDB.username);
-        userData.setId(userDB.id);
-        userData.setGender(userDB.gender);
-        return callback(null, userData);
+        if (userDB === null) {
+            const reply = new GetMyAccountResponse();
+            reply.setSuccess(false);
+            reply.setMessage('User not found')
+            return callback(null, reply);
+        }
+
+        const reply = new GetMyAccountResponse();
+        reply.setSuccess(true);
+        reply.setCreatedat(new Date(userDB.createdAt).toISOString());
+        reply.setUpdatedat(new Date(userDB.updatedAt).toISOString());
+        reply.setEmail(userDB.email);
+        reply.setUsername(userDB.username);
+        reply.setId(userDB.id);
+        reply.setGender(userDB.gender);
+        return callback(null, reply);
 
     }
 

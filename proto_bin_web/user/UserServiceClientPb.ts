@@ -13,6 +13,7 @@ import {
   ChangePasswordRequest,
   ChangePasswordResponse,
   GetMyAccountRequest,
+  GetMyAccountResponse,
   LogOutRequest,
   LogOutResponse,
   LoginRequest,
@@ -20,8 +21,7 @@ import {
   RegistrationRequest,
   RegistrationResponse,
   UpdateAccountRequest,
-  UpdateAccountResponse,
-  UserData} from './user_pb';
+  UpdateAccountResponse} from './user_pb';
 
 export class UserClient {
   client_: grpcWeb.AbstractClientBase;
@@ -109,18 +109,18 @@ export class UserClient {
   }
 
   methodInfoGetMyAccount = new grpcWeb.AbstractClientBase.MethodInfo(
-    UserData,
+    GetMyAccountResponse,
     (request: GetMyAccountRequest) => {
       return request.serializeBinary();
     },
-    UserData.deserializeBinary
+    GetMyAccountResponse.deserializeBinary
   );
 
   getMyAccount(
     request: GetMyAccountRequest,
     metadata: grpcWeb.Metadata | null,
     callback: (err: grpcWeb.Error,
-               response: UserData) => void) {
+               response: GetMyAccountResponse) => void) {
     return this.client_.rpcCall(
       this.hostname_ +
         '/grpc.user.User/GetMyAccount',

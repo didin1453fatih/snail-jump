@@ -43,14 +43,14 @@ interface IUserService_IRegistration extends grpc.MethodDefinition<user_pb.Regis
     responseSerialize: grpc.serialize<user_pb.RegistrationResponse>;
     responseDeserialize: grpc.deserialize<user_pb.RegistrationResponse>;
 }
-interface IUserService_IGetMyAccount extends grpc.MethodDefinition<user_pb.GetMyAccountRequest, user_pb.UserData> {
+interface IUserService_IGetMyAccount extends grpc.MethodDefinition<user_pb.GetMyAccountRequest, user_pb.GetMyAccountResponse> {
     path: string; // "/grpc.user.User/GetMyAccount"
     requestStream: boolean; // false
     responseStream: boolean; // false
     requestSerialize: grpc.serialize<user_pb.GetMyAccountRequest>;
     requestDeserialize: grpc.deserialize<user_pb.GetMyAccountRequest>;
-    responseSerialize: grpc.serialize<user_pb.UserData>;
-    responseDeserialize: grpc.deserialize<user_pb.UserData>;
+    responseSerialize: grpc.serialize<user_pb.GetMyAccountResponse>;
+    responseDeserialize: grpc.deserialize<user_pb.GetMyAccountResponse>;
 }
 interface IUserService_IupdateAccount extends grpc.MethodDefinition<user_pb.UpdateAccountRequest, user_pb.UpdateAccountResponse> {
     path: string; // "/grpc.user.User/updateAccount"
@@ -77,7 +77,7 @@ export interface IUserServer {
     logOut: grpc.handleUnaryCall<user_pb.LogOutRequest, user_pb.LogOutResponse>;
     changePassword: grpc.handleUnaryCall<user_pb.ChangePasswordRequest, user_pb.ChangePasswordResponse>;
     registration: grpc.handleUnaryCall<user_pb.RegistrationRequest, user_pb.RegistrationResponse>;
-    getMyAccount: grpc.handleUnaryCall<user_pb.GetMyAccountRequest, user_pb.UserData>;
+    getMyAccount: grpc.handleUnaryCall<user_pb.GetMyAccountRequest, user_pb.GetMyAccountResponse>;
     updateAccount: grpc.handleUnaryCall<user_pb.UpdateAccountRequest, user_pb.UpdateAccountResponse>;
     login: grpc.handleUnaryCall<user_pb.LoginRequest, user_pb.LoginResponse>;
 }
@@ -92,9 +92,9 @@ export interface IUserClient {
     registration(request: user_pb.RegistrationRequest, callback: (error: grpc.ServiceError | null, response: user_pb.RegistrationResponse) => void): grpc.ClientUnaryCall;
     registration(request: user_pb.RegistrationRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: user_pb.RegistrationResponse) => void): grpc.ClientUnaryCall;
     registration(request: user_pb.RegistrationRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: user_pb.RegistrationResponse) => void): grpc.ClientUnaryCall;
-    getMyAccount(request: user_pb.GetMyAccountRequest, callback: (error: grpc.ServiceError | null, response: user_pb.UserData) => void): grpc.ClientUnaryCall;
-    getMyAccount(request: user_pb.GetMyAccountRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: user_pb.UserData) => void): grpc.ClientUnaryCall;
-    getMyAccount(request: user_pb.GetMyAccountRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: user_pb.UserData) => void): grpc.ClientUnaryCall;
+    getMyAccount(request: user_pb.GetMyAccountRequest, callback: (error: grpc.ServiceError | null, response: user_pb.GetMyAccountResponse) => void): grpc.ClientUnaryCall;
+    getMyAccount(request: user_pb.GetMyAccountRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: user_pb.GetMyAccountResponse) => void): grpc.ClientUnaryCall;
+    getMyAccount(request: user_pb.GetMyAccountRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: user_pb.GetMyAccountResponse) => void): grpc.ClientUnaryCall;
     updateAccount(request: user_pb.UpdateAccountRequest, callback: (error: grpc.ServiceError | null, response: user_pb.UpdateAccountResponse) => void): grpc.ClientUnaryCall;
     updateAccount(request: user_pb.UpdateAccountRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: user_pb.UpdateAccountResponse) => void): grpc.ClientUnaryCall;
     updateAccount(request: user_pb.UpdateAccountRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: user_pb.UpdateAccountResponse) => void): grpc.ClientUnaryCall;
@@ -114,9 +114,9 @@ export class UserClient extends grpc.Client implements IUserClient {
     public registration(request: user_pb.RegistrationRequest, callback: (error: grpc.ServiceError | null, response: user_pb.RegistrationResponse) => void): grpc.ClientUnaryCall;
     public registration(request: user_pb.RegistrationRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: user_pb.RegistrationResponse) => void): grpc.ClientUnaryCall;
     public registration(request: user_pb.RegistrationRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: user_pb.RegistrationResponse) => void): grpc.ClientUnaryCall;
-    public getMyAccount(request: user_pb.GetMyAccountRequest, callback: (error: grpc.ServiceError | null, response: user_pb.UserData) => void): grpc.ClientUnaryCall;
-    public getMyAccount(request: user_pb.GetMyAccountRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: user_pb.UserData) => void): grpc.ClientUnaryCall;
-    public getMyAccount(request: user_pb.GetMyAccountRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: user_pb.UserData) => void): grpc.ClientUnaryCall;
+    public getMyAccount(request: user_pb.GetMyAccountRequest, callback: (error: grpc.ServiceError | null, response: user_pb.GetMyAccountResponse) => void): grpc.ClientUnaryCall;
+    public getMyAccount(request: user_pb.GetMyAccountRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: user_pb.GetMyAccountResponse) => void): grpc.ClientUnaryCall;
+    public getMyAccount(request: user_pb.GetMyAccountRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: user_pb.GetMyAccountResponse) => void): grpc.ClientUnaryCall;
     public updateAccount(request: user_pb.UpdateAccountRequest, callback: (error: grpc.ServiceError | null, response: user_pb.UpdateAccountResponse) => void): grpc.ClientUnaryCall;
     public updateAccount(request: user_pb.UpdateAccountRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: user_pb.UpdateAccountResponse) => void): grpc.ClientUnaryCall;
     public updateAccount(request: user_pb.UpdateAccountRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: user_pb.UpdateAccountResponse) => void): grpc.ClientUnaryCall;

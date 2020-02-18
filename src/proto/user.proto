@@ -8,7 +8,7 @@ service User {
     rpc LogOut(LogOutRequest) returns (LogOutResponse);
     rpc ChangePassword (ChangePasswordRequest) returns (ChangePasswordResponse);
     rpc Registration (RegistrationRequest) returns (RegistrationResponse);
-    rpc GetMyAccount (GetMyAccountRequest) returns (UserData);
+    rpc GetMyAccount (GetMyAccountRequest) returns (GetMyAccountResponse);
     rpc updateAccount(UpdateAccountRequest) returns(UpdateAccountResponse);
     rpc Login(LoginRequest) returns (LoginResponse);
 }
@@ -71,6 +71,17 @@ message LoginRequest {
      string password=2;
 }
 
+message GetMyAccountResponse{
+     bool success=11;
+     string message=12;
+     int32 id=1;
+     string username = 2;
+     string email = 3;
+     string password = 4;
+     string gender = 5;
+     string createdAt= 6;
+     string updatedAt= 7;
+}
 message UserData {
      int32 id=1;
      string username = 2;

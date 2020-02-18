@@ -311,13 +311,13 @@ proto.grpc.user.UserPromiseClient.prototype.registration =
  * @const
  * @type {!grpc.web.MethodDescriptor<
  *   !proto.grpc.user.GetMyAccountRequest,
- *   !proto.grpc.user.UserData>}
+ *   !proto.grpc.user.GetMyAccountResponse>}
  */
 const methodDescriptor_User_GetMyAccount = new grpc.web.MethodDescriptor(
   '/grpc.user.User/GetMyAccount',
   grpc.web.MethodType.UNARY,
   proto.grpc.user.GetMyAccountRequest,
-  proto.grpc.user.UserData,
+  proto.grpc.user.GetMyAccountResponse,
   /**
    * @param {!proto.grpc.user.GetMyAccountRequest} request
    * @return {!Uint8Array}
@@ -325,7 +325,7 @@ const methodDescriptor_User_GetMyAccount = new grpc.web.MethodDescriptor(
   function(request) {
     return request.serializeBinary();
   },
-  proto.grpc.user.UserData.deserializeBinary
+  proto.grpc.user.GetMyAccountResponse.deserializeBinary
 );
 
 
@@ -333,10 +333,10 @@ const methodDescriptor_User_GetMyAccount = new grpc.web.MethodDescriptor(
  * @const
  * @type {!grpc.web.AbstractClientBase.MethodInfo<
  *   !proto.grpc.user.GetMyAccountRequest,
- *   !proto.grpc.user.UserData>}
+ *   !proto.grpc.user.GetMyAccountResponse>}
  */
 const methodInfo_User_GetMyAccount = new grpc.web.AbstractClientBase.MethodInfo(
-  proto.grpc.user.UserData,
+  proto.grpc.user.GetMyAccountResponse,
   /**
    * @param {!proto.grpc.user.GetMyAccountRequest} request
    * @return {!Uint8Array}
@@ -344,7 +344,7 @@ const methodInfo_User_GetMyAccount = new grpc.web.AbstractClientBase.MethodInfo(
   function(request) {
     return request.serializeBinary();
   },
-  proto.grpc.user.UserData.deserializeBinary
+  proto.grpc.user.GetMyAccountResponse.deserializeBinary
 );
 
 
@@ -353,9 +353,9 @@ const methodInfo_User_GetMyAccount = new grpc.web.AbstractClientBase.MethodInfo(
  *     request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
- * @param {function(?grpc.web.Error, ?proto.grpc.user.UserData)}
+ * @param {function(?grpc.web.Error, ?proto.grpc.user.GetMyAccountResponse)}
  *     callback The callback function(error, response)
- * @return {!grpc.web.ClientReadableStream<!proto.grpc.user.UserData>|undefined}
+ * @return {!grpc.web.ClientReadableStream<!proto.grpc.user.GetMyAccountResponse>|undefined}
  *     The XHR Node Readable Stream
  */
 proto.grpc.user.UserClient.prototype.getMyAccount =
@@ -374,7 +374,7 @@ proto.grpc.user.UserClient.prototype.getMyAccount =
  *     request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
- * @return {!Promise<!proto.grpc.user.UserData>}
+ * @return {!Promise<!proto.grpc.user.GetMyAccountResponse>}
  *     A native promise that resolves to the response
  */
 proto.grpc.user.UserPromiseClient.prototype.getMyAccount =
