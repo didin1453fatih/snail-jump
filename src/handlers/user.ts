@@ -92,57 +92,68 @@ class UserHandler implements IUserServer {
                 token: authToken
             }
         })
-        const userDB = await user.findByPk(tokenDB.userId);
-        if (userDB !== null) {
-            var updatedData: {
-                username?: string,
-                email?: string,
-                gender?: string,
-            } = {}
 
-            if (data.request.getUsername() !== null) {
-                updatedData.username = data.request.getUsername()
-            }
-
-            if (data.request.getEmail() !== null) {
-                updatedData.email = data.request.getEmail()
-            }
-
-            if (data.request.getGender() !== null) {
-                updatedData.gender = data.request.getGender()
-            }
-
-            const userUpdatingRespond = await user.update(updatedData, {
-                where: {
-                    id: userDB.id
-                }
-            })
-
-            console.log('updated user DB')
-            console.log(JSON.stringify(userUpdatingRespond))
+        if (tokenDB === null) {
             const reply = new UpdateAccountResponse()
-
-            if (userUpdatingRespond[0] === 1) {
-                const userUpdatedDB = await user.findByPk(userDB.id);
-                reply.setSuccess(true);
-                reply.setId(userUpdatedDB.id);
-                reply.setUsername(userUpdatedDB.username);
-                reply.setEmail(userUpdatedDB.email);
-                reply.setGender(userUpdatedDB.gender);
-                reply.setCreatedat(new Date(userUpdatedDB.createdAt).toISOString())
-                reply.setUpdatedat(new Date(userUpdatedDB.updatedAt).toISOString())
-                return callback(null, reply);
-            } else {
-                reply.setSuccess(false);
-                reply.setMessage('Internal update error')
-                return callback(null, reply);
-            }
-        } else {
-            const reply = new UpdateAccountResponse()
-            reply.setSuccess(false)
-            reply.setMessage('credential failure')
+            reply.setSuccess(false);
+            reply.setMessage('Problem auth')
             return callback(null, reply);
         }
+
+        const userDB = await user.findByPk(tokenDB.userId);
+        if (userDB === null) {
+            const reply = new UpdateAccountResponse()
+            reply.setSuccess(false);
+            reply.setMessage('Internal error')
+            return callback(null, reply);
+        }
+
+
+        var updatedData: {
+            username?: string,
+            email?: string,
+            gender?: string,
+        } = {}
+
+        if (data.request.getUsername() !== null) {
+            updatedData.username = data.request.getUsername()
+        }
+
+        if (data.request.getEmail() !== null) {
+            updatedData.email = data.request.getEmail()
+        }
+
+        if (data.request.getGender() !== null) {
+            updatedData.gender = data.request.getGender()
+        }
+
+        const userUpdatingRespond = await user.update(updatedData, {
+            where: {
+                id: userDB.id
+            }
+        })
+
+        console.log('updated user DB')
+        console.log(JSON.stringify(userUpdatingRespond))
+        const reply = new UpdateAccountResponse()
+
+        if (userUpdatingRespond[0] === 1) {
+            const userUpdatedDB = await user.findByPk(userDB.id);
+            reply.setSuccess(true);
+            reply.setId(userUpdatedDB.id);
+            reply.setUsername(userUpdatedDB.username);
+            reply.setEmail(userUpdatedDB.email);
+            reply.setGender(userUpdatedDB.gender);
+            reply.setCreatedat(new Date(userUpdatedDB.createdAt).toISOString())
+            reply.setUpdatedat(new Date(userUpdatedDB.updatedAt).toISOString())
+            return callback(null, reply);
+        } else {
+            reply.setSuccess(false);
+            reply.setMessage('Internal update error')
+            return callback(null, reply);
+        }
+
+
 
     }
     // getMyAccount: grpc.handleUnaryCall<import("../../proto_bin/user/user_pb").GetMyAccountRequest, import("../../proto_bin/user/user_pb").UserData>;
