@@ -44,32 +44,41 @@ class UserHandler implements IUserServer {
                 token: authToken
             }
         })
+
+        if (authToken === null) {
+            const reply = new ChangePasswordResponse()
+            reply.setSuccess(false);
+            reply.setMessage('Auth error. Please login again.')
+            return callback(null, reply)
+        }
+
         const userDB = await user.findByPk(tokenDB.userId);
-        if (userDB !== null) {
-            if (data.request.getPassword() === data.request.getConfirmpassword()) {
-                var hashedPassword = bcrypt.hashSync(data.request.getPassword(), 10);
-                user.update({
-                    password: hashedPassword
-                }, {
-                    where: {
-                        id: userDB.id
-                    }
-                })
-                const reply = new ChangePasswordResponse()
-                reply.setSuccess(true);
-                return callback(null, reply)
-            } else {
-                const reply = new ChangePasswordResponse()
-                reply.setSuccess(false);
-                reply.setMessage('Confirmation password not match')
-                return callback(null, reply)
-            }
-        } else {
+        if (userDB === null) {
             const reply = new ChangePasswordResponse()
             reply.setSuccess(false);
             reply.setMessage('Authentication problem')
             return callback(null, reply)
         }
+
+        if (data.request.getPassword() !== data.request.getConfirmpassword()) {
+            const reply = new ChangePasswordResponse()
+            reply.setSuccess(false);
+            reply.setMessage('Confirmation password not match')
+            return callback(null, reply)
+        }
+
+        var hashedPassword = bcrypt.hashSync(data.request.getPassword(), 10);
+        user.update({
+            password: hashedPassword
+        }, {
+            where: {
+                id: userDB.id
+            }
+        })
+        const reply = new ChangePasswordResponse()
+        reply.setSuccess(true);
+        return callback(null, reply)
+
     }
 
     updateAccount = async (data: grpc.ServerUnaryCall<UpdateAccountRequest>, callback: grpc.sendUnaryData<UpdateAccountResponse>): Promise<void> => {
