@@ -6,6 +6,103 @@
 
 import * as jspb from "google-protobuf";
 
+export class FindUserRequest extends jspb.Message { 
+    getKeyword(): string;
+    setKeyword(value: string): void;
+
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): FindUserRequest.AsObject;
+    static toObject(includeInstance: boolean, msg: FindUserRequest): FindUserRequest.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: FindUserRequest, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): FindUserRequest;
+    static deserializeBinaryFromReader(message: FindUserRequest, reader: jspb.BinaryReader): FindUserRequest;
+}
+
+export namespace FindUserRequest {
+    export type AsObject = {
+        keyword: string,
+    }
+}
+
+export class FindUserResponse extends jspb.Message { 
+    getSuccess(): boolean;
+    setSuccess(value: boolean): void;
+
+    getMessage(): string;
+    setMessage(value: string): void;
+
+    getTotal(): number;
+    setTotal(value: number): void;
+
+    clearPayloadList(): void;
+    getPayloadList(): Array<UserData>;
+    setPayloadList(value: Array<UserData>): void;
+    addPayload(value?: UserData, index?: number): UserData;
+
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): FindUserResponse.AsObject;
+    static toObject(includeInstance: boolean, msg: FindUserResponse): FindUserResponse.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: FindUserResponse, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): FindUserResponse;
+    static deserializeBinaryFromReader(message: FindUserResponse, reader: jspb.BinaryReader): FindUserResponse;
+}
+
+export namespace FindUserResponse {
+    export type AsObject = {
+        success: boolean,
+        message: string,
+        total: number,
+        payloadList: Array<UserData.AsObject>,
+    }
+}
+
+export class UserData extends jspb.Message { 
+    getId(): number;
+    setId(value: number): void;
+
+    getUsername(): string;
+    setUsername(value: string): void;
+
+    getEmail(): string;
+    setEmail(value: string): void;
+
+    getGender(): string;
+    setGender(value: string): void;
+
+    getCreatedat(): string;
+    setCreatedat(value: string): void;
+
+    getUpdatedat(): string;
+    setUpdatedat(value: string): void;
+
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): UserData.AsObject;
+    static toObject(includeInstance: boolean, msg: UserData): UserData.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: UserData, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): UserData;
+    static deserializeBinaryFromReader(message: UserData, reader: jspb.BinaryReader): UserData;
+}
+
+export namespace UserData {
+    export type AsObject = {
+        id: number,
+        username: string,
+        email: string,
+        gender: string,
+        createdat: string,
+        updatedat: string,
+    }
+}
+
 export class LogOutRequest extends jspb.Message { 
 
     serializeBinary(): Uint8Array;
@@ -323,51 +420,6 @@ export namespace GetMyAccountResponse {
     export type AsObject = {
         success: boolean,
         message: string,
-        id: number,
-        username: string,
-        email: string,
-        password: string,
-        gender: string,
-        createdat: string,
-        updatedat: string,
-    }
-}
-
-export class UserData extends jspb.Message { 
-    getId(): number;
-    setId(value: number): void;
-
-    getUsername(): string;
-    setUsername(value: string): void;
-
-    getEmail(): string;
-    setEmail(value: string): void;
-
-    getPassword(): string;
-    setPassword(value: string): void;
-
-    getGender(): string;
-    setGender(value: string): void;
-
-    getCreatedat(): string;
-    setCreatedat(value: string): void;
-
-    getUpdatedat(): string;
-    setUpdatedat(value: string): void;
-
-
-    serializeBinary(): Uint8Array;
-    toObject(includeInstance?: boolean): UserData.AsObject;
-    static toObject(includeInstance: boolean, msg: UserData): UserData.AsObject;
-    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-    static serializeBinaryToWriter(message: UserData, writer: jspb.BinaryWriter): void;
-    static deserializeBinary(bytes: Uint8Array): UserData;
-    static deserializeBinaryFromReader(message: UserData, reader: jspb.BinaryReader): UserData;
-}
-
-export namespace UserData {
-    export type AsObject = {
         id: number,
         username: string,
         email: string,

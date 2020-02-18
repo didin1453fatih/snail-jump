@@ -8,6 +8,7 @@ import * as grpc from "grpc";
 import * as user_pb from "./user_pb";
 
 interface IUserService extends grpc.ServiceDefinition<grpc.UntypedServiceImplementation> {
+    findUser: IUserService_IFindUser;
     logOut: IUserService_ILogOut;
     changePassword: IUserService_IChangePassword;
     registration: IUserService_IRegistration;
@@ -16,6 +17,15 @@ interface IUserService extends grpc.ServiceDefinition<grpc.UntypedServiceImpleme
     login: IUserService_ILogin;
 }
 
+interface IUserService_IFindUser extends grpc.MethodDefinition<user_pb.FindUserRequest, user_pb.FindUserResponse> {
+    path: string; // "/grpc.user.User/FindUser"
+    requestStream: boolean; // false
+    responseStream: boolean; // false
+    requestSerialize: grpc.serialize<user_pb.FindUserRequest>;
+    requestDeserialize: grpc.deserialize<user_pb.FindUserRequest>;
+    responseSerialize: grpc.serialize<user_pb.FindUserResponse>;
+    responseDeserialize: grpc.deserialize<user_pb.FindUserResponse>;
+}
 interface IUserService_ILogOut extends grpc.MethodDefinition<user_pb.LogOutRequest, user_pb.LogOutResponse> {
     path: string; // "/grpc.user.User/LogOut"
     requestStream: boolean; // false
@@ -74,6 +84,7 @@ interface IUserService_ILogin extends grpc.MethodDefinition<user_pb.LoginRequest
 export const UserService: IUserService;
 
 export interface IUserServer {
+    findUser: grpc.handleUnaryCall<user_pb.FindUserRequest, user_pb.FindUserResponse>;
     logOut: grpc.handleUnaryCall<user_pb.LogOutRequest, user_pb.LogOutResponse>;
     changePassword: grpc.handleUnaryCall<user_pb.ChangePasswordRequest, user_pb.ChangePasswordResponse>;
     registration: grpc.handleUnaryCall<user_pb.RegistrationRequest, user_pb.RegistrationResponse>;
@@ -83,6 +94,9 @@ export interface IUserServer {
 }
 
 export interface IUserClient {
+    findUser(request: user_pb.FindUserRequest, callback: (error: grpc.ServiceError | null, response: user_pb.FindUserResponse) => void): grpc.ClientUnaryCall;
+    findUser(request: user_pb.FindUserRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: user_pb.FindUserResponse) => void): grpc.ClientUnaryCall;
+    findUser(request: user_pb.FindUserRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: user_pb.FindUserResponse) => void): grpc.ClientUnaryCall;
     logOut(request: user_pb.LogOutRequest, callback: (error: grpc.ServiceError | null, response: user_pb.LogOutResponse) => void): grpc.ClientUnaryCall;
     logOut(request: user_pb.LogOutRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: user_pb.LogOutResponse) => void): grpc.ClientUnaryCall;
     logOut(request: user_pb.LogOutRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: user_pb.LogOutResponse) => void): grpc.ClientUnaryCall;
@@ -105,6 +119,9 @@ export interface IUserClient {
 
 export class UserClient extends grpc.Client implements IUserClient {
     constructor(address: string, credentials: grpc.ChannelCredentials, options?: object);
+    public findUser(request: user_pb.FindUserRequest, callback: (error: grpc.ServiceError | null, response: user_pb.FindUserResponse) => void): grpc.ClientUnaryCall;
+    public findUser(request: user_pb.FindUserRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: user_pb.FindUserResponse) => void): grpc.ClientUnaryCall;
+    public findUser(request: user_pb.FindUserRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: user_pb.FindUserResponse) => void): grpc.ClientUnaryCall;
     public logOut(request: user_pb.LogOutRequest, callback: (error: grpc.ServiceError | null, response: user_pb.LogOutResponse) => void): grpc.ClientUnaryCall;
     public logOut(request: user_pb.LogOutRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: user_pb.LogOutResponse) => void): grpc.ClientUnaryCall;
     public logOut(request: user_pb.LogOutRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: user_pb.LogOutResponse) => void): grpc.ClientUnaryCall;

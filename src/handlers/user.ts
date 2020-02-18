@@ -11,6 +11,8 @@ import {
     LogOutRequest,
     LogOutResponse,
     GetMyAccountResponse,
+    FindUserResponse,
+    FindUserRequest,
 } from './../../proto_bin/user/user_pb';
 import { user } from './../model/user.model';
 import * as grpc from 'grpc';
@@ -18,8 +20,35 @@ import * as grpc from 'grpc';
 import { RegistrationRequest, RegistrationResponse, ChangePasswordRequest, ChangePasswordResponse } from '../../proto_bin/user/user_pb';
 import { UserService, IUserServer } from '../../proto_bin/user/user_grpc_pb';
 import bcrypt from "bcrypt"
+import { Op } from 'sequelize';
 
 class UserHandler implements IUserServer {
+    findUser = async (data: grpc.ServerUnaryCall<FindUserRequest>, callback: grpc.sendUnaryData<FindUserResponse>): Promise<void> => {
+        var userDB = await user.findAndCountAll({
+            where: {
+                username: {
+                    [Op.like]: `%${data.request.getKeyword()}%`
+                }
+            },
+            limit: 10
+        })
+        console.log('\r\n*************\r\nUser found\r\n')
+        console.log(JSON.stringify(userDB.rows))
+        const reply = new FindUserResponse()
+        reply.setSuccess(true)
+        reply.setTotal(userDB.count)
+
+        var list: UserData[] = []
+        await userDB.rows.forEach(item => {
+            var userDataTMP = new UserData()
+            userDataTMP.setUsername(item.username);
+            userDataTMP.setEmail(item.username);
+            list.push(userDataTMP);
+        })
+        reply.setPayloadList(list)
+        return callback(null, reply)
+        // reply.setPayloadList()
+    }
     logOut = async (data: grpc.ServerUnaryCall<LogOutRequest>, callback: grpc.sendUnaryData<LogOutResponse>): Promise<void> => {
         var authToken = data.metadata.get('authToken')
         console.log(authToken)

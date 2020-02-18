@@ -70,6 +70,86 @@ proto.grpc.user.UserPromiseClient =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
+ *   !proto.grpc.user.FindUserRequest,
+ *   !proto.grpc.user.FindUserResponse>}
+ */
+const methodDescriptor_User_FindUser = new grpc.web.MethodDescriptor(
+  '/grpc.user.User/FindUser',
+  grpc.web.MethodType.UNARY,
+  proto.grpc.user.FindUserRequest,
+  proto.grpc.user.FindUserResponse,
+  /**
+   * @param {!proto.grpc.user.FindUserRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.grpc.user.FindUserResponse.deserializeBinary
+);
+
+
+/**
+ * @const
+ * @type {!grpc.web.AbstractClientBase.MethodInfo<
+ *   !proto.grpc.user.FindUserRequest,
+ *   !proto.grpc.user.FindUserResponse>}
+ */
+const methodInfo_User_FindUser = new grpc.web.AbstractClientBase.MethodInfo(
+  proto.grpc.user.FindUserResponse,
+  /**
+   * @param {!proto.grpc.user.FindUserRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.grpc.user.FindUserResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.grpc.user.FindUserRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.Error, ?proto.grpc.user.FindUserResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.grpc.user.FindUserResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.grpc.user.UserClient.prototype.findUser =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/grpc.user.User/FindUser',
+      request,
+      metadata || {},
+      methodDescriptor_User_FindUser,
+      callback);
+};
+
+
+/**
+ * @param {!proto.grpc.user.FindUserRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.grpc.user.FindUserResponse>}
+ *     A native promise that resolves to the response
+ */
+proto.grpc.user.UserPromiseClient.prototype.findUser =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/grpc.user.User/FindUser',
+      request,
+      metadata || {},
+      methodDescriptor_User_FindUser);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
  *   !proto.grpc.user.LogOutRequest,
  *   !proto.grpc.user.LogOutResponse>}
  */

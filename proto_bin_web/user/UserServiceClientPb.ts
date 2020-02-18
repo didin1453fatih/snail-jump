@@ -12,6 +12,8 @@ import * as grpcWeb from 'grpc-web';
 import {
   ChangePasswordRequest,
   ChangePasswordResponse,
+  FindUserRequest,
+  FindUserResponse,
   GetMyAccountRequest,
   GetMyAccountResponse,
   LogOutRequest,
@@ -40,6 +42,28 @@ export class UserClient {
     this.hostname_ = hostname;
     this.credentials_ = credentials;
     this.options_ = options;
+  }
+
+  methodInfoFindUser = new grpcWeb.AbstractClientBase.MethodInfo(
+    FindUserResponse,
+    (request: FindUserRequest) => {
+      return request.serializeBinary();
+    },
+    FindUserResponse.deserializeBinary
+  );
+
+  findUser(
+    request: FindUserRequest,
+    metadata: grpcWeb.Metadata | null,
+    callback: (err: grpcWeb.Error,
+               response: FindUserResponse) => void) {
+    return this.client_.rpcCall(
+      this.hostname_ +
+        '/grpc.user.User/FindUser',
+      request,
+      metadata || {},
+      this.methodInfoFindUser,
+      callback);
   }
 
   methodInfoLogOut = new grpcWeb.AbstractClientBase.MethodInfo(
