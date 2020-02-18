@@ -3,6 +3,11 @@ cd "${BASEDIR}"/../
 
 for f in ./src/proto/*; do
 
+    # skip the non proto files
+    if [ "$(basename "$f")" == "Mecca.json" ]; then
+        continue
+    fi
+    
     echo "$(basename "$f")"
     IFS='.' read -ra DIR_BIN <<<"$(basename "$f")"
     echo ${DIR_BIN[0]}

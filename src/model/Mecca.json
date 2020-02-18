@@ -1,0 +1,31 @@
+{
+    "origin":"",
+    "produce": {
+        "service": {
+            "User": {
+                "version": "1.0.1",
+                "description": "lorem epsum",
+                "path": "User.proto"
+            },
+            "Dashboard": {
+                "version": "1.0.1",
+                "description": "lorem epsum",
+                "path": "Dashboard.proto"
+            }
+        }
+    },
+    "consume": {
+        "service": {
+            "User": {
+                "version": "1.0.1",
+                "description": "lorem epsum",
+                "path": "User.proto"
+            },
+            "Dashboard": {
+                "version": "1.0.1",
+                "description": "lorem epsum",
+                "path": "Dashboard.proto"
+            }
+        }
+    }
+}
