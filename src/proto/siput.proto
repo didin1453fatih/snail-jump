@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package grpc.user;
+
+// The greeting service definition.
+service Siput {
+    // Sends a greeting
+    rpc Push(stream PushRequest) returns (PushResponse);
+    rpc UploadProtobuf(stream UploadProtobufRequest) returns (UploadProtobufResponse);
+}
+message PushRequest {
+    bytes Content = 1;
+}
+message PushResponse {
+    bool success= 1;
+}
+
+message UploadProtobufRequest{
+    bytes Content = 1;
+}
+
+message UploadProtobufResponse{
+    bytes Content = 1;
+}

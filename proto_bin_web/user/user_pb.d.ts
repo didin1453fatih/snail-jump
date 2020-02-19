@@ -4,6 +4,12 @@ export class FindUserRequest extends jspb.Message {
   getKeyword(): string;
   setKeyword(value: string): void;
 
+  getLimit(): number;
+  setLimit(value: number): void;
+
+  getPage(): number;
+  setPage(value: number): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): FindUserRequest.AsObject;
   static toObject(includeInstance: boolean, msg: FindUserRequest): FindUserRequest.AsObject;
@@ -15,6 +21,8 @@ export class FindUserRequest extends jspb.Message {
 export namespace FindUserRequest {
   export type AsObject = {
     keyword: string,
+    limit: number,
+    page: number,
   }
 }
 
