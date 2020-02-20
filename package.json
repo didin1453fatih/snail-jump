@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "npx nodemon -L",
     "build": "npx tsc --skipLibCheck",
-    "start": "npx tsc --skipLibCheck && node ./dist/server.js",
+    "start": "npx tsc && node ./.build/server.js",
     "protoc": "./scripts/protoc.sh"
   },
   "keywords": [],
@@ -21,6 +21,7 @@
     "dotenv": "^8.2.0",
     "google-protobuf": "^3.11.2",
     "grpc": "^1.24.2",
+    "grpc-web": "^1.0.7",
     "install": "^0.13.0",
     "protoc-gen-grpc": "^1.4.0",
     "reflect-metadata": "^0.1.13",

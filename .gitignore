@@ -216,3 +216,4 @@ fabric.properties
 /dist
 
 run.sh
+.build
