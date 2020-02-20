@@ -70,7 +70,9 @@ proto.grpc.user.FindUserRequest.prototype.toObject = function(opt_includeInstanc
  */
 proto.grpc.user.FindUserRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    keyword: msg.getKeyword()
+    keyword: msg.getKeyword(),
+    limit: msg.getLimit(),
+    page: msg.getPage()
   };
 
   if (includeInstance) {
@@ -110,6 +112,14 @@ proto.grpc.user.FindUserRequest.deserializeBinaryFromReader = function(msg, read
     case 1:
       var value = /** @type {string} */ (reader.readString());
       msg.setKeyword(value);
+      break;
+    case 2:
+      var value = /** @type {number} */ (reader.readInt32());
+      msg.setLimit(value);
+      break;
+    case 3:
+      var value = /** @type {number} */ (reader.readInt32());
+      msg.setPage(value);
       break;
     default:
       reader.skipField();
@@ -156,6 +166,20 @@ proto.grpc.user.FindUserRequest.prototype.serializeBinaryToWriter = function (wr
       f
     );
   }
+  f = this.getLimit();
+  if (f !== 0) {
+    writer.writeInt32(
+      2,
+      f
+    );
+  }
+  f = this.getPage();
+  if (f !== 0) {
+    writer.writeInt32(
+      3,
+      f
+    );
+  }
 };
 
 
@@ -180,6 +204,36 @@ proto.grpc.user.FindUserRequest.prototype.getKeyword = function() {
 /** @param {string} value  */
 proto.grpc.user.FindUserRequest.prototype.setKeyword = function(value) {
   jspb.Message.setField(this, 1, value);
+};
+
+
+/**
+ * optional int32 limit = 2;
+ * @return {number}
+ */
+proto.grpc.user.FindUserRequest.prototype.getLimit = function() {
+  return /** @type {number} */ (jspb.Message.getFieldProto3(this, 2, 0));
+};
+
+
+/** @param {number} value  */
+proto.grpc.user.FindUserRequest.prototype.setLimit = function(value) {
+  jspb.Message.setField(this, 2, value);
+};
+
+
+/**
+ * optional int32 page = 3;
+ * @return {number}
+ */
+proto.grpc.user.FindUserRequest.prototype.getPage = function() {
+  return /** @type {number} */ (jspb.Message.getFieldProto3(this, 3, 0));
+};
+
+
+/** @param {number} value  */
+proto.grpc.user.FindUserRequest.prototype.setPage = function(value) {
+  jspb.Message.setField(this, 3, value);
 };
 
 
