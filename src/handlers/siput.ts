@@ -7,6 +7,8 @@ import { EchoServiceService, IEchoServiceServer } from '../../proto_bin/echo/ech
 import { EchoRequest, EchoResponse } from '../../proto_bin/echo/echo_pb';
 
 class SiputHandler implements ISiputServer {
+    // push: grpc.handleClientStreamingCall<PushRequest, PushResponse>;
+    uploadProtobuf: grpc.handleClientStreamingCall<import("../../proto_bin/siput/siput_pb").UploadProtobufRequest, import("../../proto_bin/siput/siput_pb").UploadProtobufResponse>;
     // push: grpc.handleBidiStreamingCall<PushRequest, PushResponse>;
 
     // getGreatestBook(call: grpc.ServerReadableStream<GetBookRequest>, callback: grpc.sendUnaryData<Book>) {
