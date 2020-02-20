@@ -52,5 +52,6 @@ WORKDIR /home/grpc-server/project
 # VOLUME [ "/c:/Users/galih/Documents/learning/gRPC/ExpressIntegration/SimpleServer/server:/home/app" ]
 # RUN npm install
 # EXPOSE 3000:3000
+# CMD ["/bin/bash"]
 RUN sudo yarn install
-CMD ["/bin/bash"]
+CMD ["sudo yarn dev"]
